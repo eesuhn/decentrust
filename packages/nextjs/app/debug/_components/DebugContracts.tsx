@@ -1,11 +1,11 @@
 "use client";
 
+import { ContractUI } from "@/app/debug/_components/contract";
+import { ContractName, GenericContract } from "@/utils/scaffold-eth/contract";
+import { useAllContracts } from "@/utils/scaffold-eth/contractsData";
+import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import { useEffect, useMemo } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
-import { ContractUI } from "~~/app/debug/_components/contract";
-import { ContractName, GenericContract } from "~~/utils/scaffold-eth/contract";
-import { useAllContracts } from "~~/utils/scaffold-eth/contractsData";
 
 const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 

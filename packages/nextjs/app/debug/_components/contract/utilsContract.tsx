@@ -1,5 +1,5 @@
+import { AbiParameterTuple } from "@/utils/scaffold-eth/contract";
 import { AbiFunction, AbiParameter } from "abitype";
-import { AbiParameterTuple } from "~~/utils/scaffold-eth/contract";
 
 /**
  * Generates a key based on function metadata
@@ -155,10 +155,7 @@ const transformAbiFunction = (abiFunction: AbiFunction): AbiFunction => {
 };
 
 export {
-  getFunctionInputKey,
-  getInitialFormState,
-  getParsedContractFunctionArgs,
-  getInitialTupleFormState,
-  getInitialTupleArrayFormState,
-  transformAbiFunction,
+    getFunctionInputKey,
+    getInitialFormState, getInitialTupleArrayFormState, getInitialTupleFormState, getParsedContractFunctionArgs, transformAbiFunction
 };
+

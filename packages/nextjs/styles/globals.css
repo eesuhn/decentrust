@@ -1,32 +1,69 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root,
-[data-theme] {
-  background: oklch(var(--b2));
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* New Primary: #0468bf */
+    --foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
+    --card: 0 0% 100%; /* New Accent: #30c8d9 */
+    --card-foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
+    --popover: 0 0% 100%; /* New Accent: #30c8d9 */
+    --popover-foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
+    --primary: 240 5.9% 10%; /* New Primary: #0468bf */
+    --primary-foreground: 0 0% 98%; /* White: #ffffff */
+    --secondary: 240 4.8% 95.9%; /* New Secondary: #1b80bf */
+    --secondary-foreground: 240 5.9% 10%; /* White: #ffffff */
+    --muted: 240 4.8% 95.9%; /* New Neutral: #d8f2f2 */
+    --muted-foreground: 240 3.8% 46.1%; /* New Primary: #0468bf */
+    --accent: 240 4.8% 95.9%; /* New Accent: #30c8d9 */
+    --accent-foreground: 240 5.9% 10%; /* White: #ffffff */
+    --destructive: 0 84.2% 60.2%; /* Keep Dark Olive: #FF8863 */
+    --destructive-foreground: 0 0% 98%; /* White */
+    --border: 240 5.9% 90%; /* Lighter version of Secondary */
+    --input: 240 5.9% 90%; /* Same as Secondary */
+    --ring: 240 10% 3.9%; /* New Primary */
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%; /* New Primary: #0468bf */
+    --chart-2: 173 58% 39%; /* New Secondary: #1b80bf */
+    --chart-3: 197 37% 24%; /* New Accent: #30c8d9 */
+    --chart-4: 43 74% 66%; /* New Neutral: #d8f2f2 */
+    --chart-5: 27 87% 67%; /* Dark Olive: #FF8863 */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%; /* Darker version of Secondary */
+    --foreground: 0 0% 98%; /* Almost White */
+    --card: 240 10% 3.9%; /* Darker version of Secondary */
+    --card-foreground: 0 0% 98%; /* Almost White */
+    --popover: 240 10% 3.9%; /* Darker version of Secondary */
+    --popover-foreground: 0 0% 98%; /* Almost White */
+    --primary: 0 0% 98%; /* New Primary: #0468bf */
+    --primary-foreground: 240 5.9% 10%; /* White */
+    --secondary: 240 3.7% 15.9%; /* New Secondary: #1b80bf */
+    --secondary-foreground: 0 0% 98%; /* White */
+    --muted: 240 3.7% 15.9%; /* New Neutral: #d8f2f2 */
+    --muted-foreground: 240 5% 64.9%; /* New Primary: #0468bf */
+    --accent: 240 3.7% 15.9%; /* New Accent: #30c8d9 */
+    --accent-foreground: 0 0% 98%; /* White */
+    --destructive: 0 62.8% 30.6%; /* Dark Olive */
+    --destructive-foreground: 0 0% 98%; /* Almost White */
+    --border: 240 3.7% 15.9%; /* Darker version of Secondary */
+    --input: 240 3.7% 15.9%; /* Darker version of Secondary */
+    --ring: 240 4.9% 83.9%; /* New Primary */
+    --chart-1: 220 70% 50%; /* New Primary */
+    --chart-2: 160 60% 45%; /* New Secondary */
+    --chart-3: 30 80% 55%; /* New Accent */
+    --chart-4: 280 65% 60%; /* New Neutral */
+    --chart-5: 340 75% 55%; /* Dark Olive */
+  }
 }
 
-body {
-  min-height: 100vh;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-p {
-  margin: 1rem 0;
-}
-
-.btn {
-  @apply shadow-md;
-}
-
-.btn.btn-ghost {
-  @apply shadow-none;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

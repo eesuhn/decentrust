@@ -1,8 +1,10 @@
 {
-  "arrowParens": "avoid",
-  "printWidth": 120,
   "tabWidth": 2,
-  "trailingComma": "all",
-  "importOrder": ["^react$", "^next/(.*)$", "<THIRD_PARTY_MODULES>", "^@heroicons/(.*)$", "^~~/(.*)$"],
-  "importOrderSortSpecifiers": true
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": false,
+  "printWidth": 152,
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+ 	]
 }
