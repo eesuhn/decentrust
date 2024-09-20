@@ -1,16 +1,26 @@
 "use client";
 
-import Link from "next/link";
-import type { NextPage } from "next";
-import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Address } from "~~/components/scaffold-eth";
+import type { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { useAccount } from "wagmi";
+import { Address } from "@/components/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
 
   return (
     <>
+      <Image
+        src="/banner-2.png"
+        alt="Banner"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority
+        className="transition-all duration-300 ease-in-out dark:invert object-contain"
+      />
+
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
