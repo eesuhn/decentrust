@@ -1,32 +1,32 @@
+import deployedContractsData from "@/contracts/deployedContracts";
+import externalContractsData from "@/contracts/externalContracts";
+import scaffoldConfig from "@/scaffold.config";
 import { MutateOptions } from "@tanstack/react-query";
-import {
-  Abi,
-  AbiParameter,
-  AbiParameterToPrimitiveType,
-  AbiParametersToPrimitiveTypes,
-  ExtractAbiEvent,
-  ExtractAbiEventNames,
-  ExtractAbiFunction,
-} from "abitype";
 import type { ExtractAbiFunctionNames } from "abitype";
+import {
+    Abi,
+    AbiParameter,
+    AbiParameterToPrimitiveType,
+    AbiParametersToPrimitiveTypes,
+    ExtractAbiEvent,
+    ExtractAbiEventNames,
+    ExtractAbiFunction,
+} from "abitype";
 import type { Simplify } from "type-fest";
 import type { MergeDeepRecord } from "type-fest/source/merge-deep";
 import {
-  Address,
-  Block,
-  GetEventArgs,
-  GetTransactionReceiptReturnType,
-  GetTransactionReturnType,
-  Log,
-  TransactionReceipt,
-  WriteContractErrorType,
+    Address,
+    Block,
+    GetEventArgs,
+    GetTransactionReceiptReturnType,
+    GetTransactionReturnType,
+    Log,
+    TransactionReceipt,
+    WriteContractErrorType,
 } from "viem";
 import { Config, UseReadContractParameters, UseWatchContractEventParameters } from "wagmi";
 import { WriteContractParameters, WriteContractReturnType } from "wagmi/actions";
 import { WriteContractVariables } from "wagmi/query";
-import deployedContractsData from "~~/contracts/deployedContracts";
-import externalContractsData from "~~/contracts/externalContracts";
-import scaffoldConfig from "~~/scaffold.config";
 
 type AddExternalFlag<T> = {
   [ChainId in keyof T]: {

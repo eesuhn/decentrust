@@ -1,5 +1,5 @@
+import { useGlobalState } from "@/services/store/store";
 import { useCallback, useEffect, useState } from "react";
-import { useGlobalState } from "~~/services/store/store";
 
 export const useDisplayUsdMode = ({ defaultUsdMode = false }: { defaultUsdMode?: boolean }) => {
   const nativeCurrencyPrice = useGlobalState(state => state.nativeCurrency.price);
