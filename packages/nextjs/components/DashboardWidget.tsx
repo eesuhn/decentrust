@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Award, ChevronRight, FileText, Medal, Star, Trophy } from "lucide-react"
+import { useState } from "react"
 
-const documents = [
-  { type: "resume", name: "Software Engineer Resume", date: "2023-05-15" },
+const jobListings = [
+  { name: "Full Stack Developer" },
   {
-    type: "certificate",
-    name: "React Developer Certificate",
-    date: "2023-03-10",
+    name: "DevOps Engineer",
   },
-  { type: "resume", name: "Project Manager Resume", date: "2023-04-22" },
-  { type: "certificate", name: "Agile Scrum Master", date: "2023-02-28" },
+  { name: "Cybersecurity Analyst" },
 ]
 
 const badges = [
@@ -20,47 +18,30 @@ const badges = [
   { name: "1000 Commits", icon: Medal },
 ]
 
-export default function DashboardWidget({ type }: { type: "documents" | "badges" }) {
+export default function DashboardWidget() {
+  const [showApplicant, setShowApplicants] = useState(false)
   return (
     <Card className="mx-auto w-full max-w-md">
       <CardHeader className="text-center">
-        <CardTitle>{type === "documents" ? "Documents" : "Badges"}</CardTitle>
+        <CardTitle>Job listings</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-2">
-          {type === "documents" &&
-            documents.map((doc, index) => (
-              <li key={index} className="group">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start text-left hover:bg-secondary"
-                  onClick={() => console.log(`Clicked: ${doc.name}`)}
-                >
-                  <div className="flex w-full items-center space-x-3">
-                    <div className="flex-shrink-0">
-                      <FileText className="h-5 w-5 text-blue-500 group-hover:text-white" />
-                    </div>
-                    <div className="flex-grow">
-                      <p className="text-sm font-medium group-hover:text-white">{doc.name}</p>
-                      <p className="text-xs text-muted-foreground group-hover:text-white">{doc.date}</p>
-                    </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-white" />
+          {jobListings.map((jobListing, index) => (
+            <li key={index} className="group">
+              <Button variant="ghost" className="w-full justify-start text-left hover:bg-secondary" onClick={() => setShowApplicants(!showApplicant)}>
+                <div className="flex w-full items-center space-x-3">
+                  <div className="flex-shrink-0">
+                    <FileText className="h-5 w-5 text-blue-500 group-hover:text-white" />
                   </div>
-                </Button>
-              </li>
-            ))}
-
-          {type === "badges" &&
-            badges.map((badge, index) => (
-              <li key={index} className="group flex items-center space-x-3 rounded-md p-2 hover:bg-secondary">
-                <div className="flex-shrink-0">
-                  <badge.icon className="h-6 w-6 text-primary group-hover:text-white" />
+                  <div className="flex-grow">
+                    <p className="text-sm font-medium group-hover:text-white">{jobListing.name}</p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-white" />
                 </div>
-                <div className="flex-grow">
-                  <p className="text-sm font-medium group-hover:text-white">{badge.name}</p>
-                </div>
-              </li>
-            ))}
+              </Button>
+            </li>
+          ))}
         </ul>
       </CardContent>
     </Card>
