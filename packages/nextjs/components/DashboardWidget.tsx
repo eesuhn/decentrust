@@ -30,7 +30,7 @@ export default function DashboardWidget({ type }: { type: "documents" | "badges"
         <ul className="space-y-2">
           {type === "documents" &&
             documents.map((doc, index) => (
-              <li key={index}>
+              <li key={index} className="group">
                 <Button
                   variant="ghost"
                   className="w-full justify-start text-left hover:bg-secondary"
@@ -38,13 +38,13 @@ export default function DashboardWidget({ type }: { type: "documents" | "badges"
                 >
                   <div className="flex w-full items-center space-x-3">
                     <div className="flex-shrink-0">
-                      <FileText className="h-5 w-5 text-blue-500" />
+                      <FileText className="h-5 w-5 text-blue-500 group-hover:text-white" />
                     </div>
                     <div className="flex-grow">
-                      <p className="text-sm font-medium">{doc.name}</p>
-                      <p className="text-xs text-muted-foreground">{doc.date}</p>
+                      <p className="text-sm font-medium group-hover:text-white">{doc.name}</p>
+                      <p className="text-xs text-muted-foreground group-hover:text-white">{doc.date}</p>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-white" />
                   </div>
                 </Button>
               </li>
@@ -52,12 +52,12 @@ export default function DashboardWidget({ type }: { type: "documents" | "badges"
 
           {type === "badges" &&
             badges.map((badge, index) => (
-              <li key={index} className="flex items-center space-x-3 rounded-md p-2 hover:bg-secondary">
+              <li key={index} className="group flex items-center space-x-3 rounded-md p-2 hover:bg-secondary">
                 <div className="flex-shrink-0">
-                  <badge.icon className="h-6 w-6 text-primary" />
+                  <badge.icon className="h-6 w-6 text-primary group-hover:text-white" />
                 </div>
                 <div className="flex-grow">
-                  <p className="text-sm font-medium">{badge.name}</p>
+                  <p className="text-sm font-medium group-hover:text-white">{badge.name}</p>
                 </div>
               </li>
             ))}
