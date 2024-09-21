@@ -37,7 +37,6 @@ export default function WorldIDSignIn() {
       })
 
       const data = await response.json()
-      console.log("Server response:", data)
 
       // Store the proof in localStorage to mark the user as verified
       if (data.success) {
