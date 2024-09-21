@@ -42,3 +42,7 @@ bracket_spacing = true
 int_types = "long"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+[dependencies]
+"@openzeppelin-contracts" = "5.0.2"
+"@openzeppelin-contracts-upgradeable" = "5.0.2"
