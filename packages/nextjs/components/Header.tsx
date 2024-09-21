@@ -21,11 +21,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Home",
     href: "/",
   },
-  {
-    label: "Debug Contracts",
-    href: "/debug",
-    icon: <BugAntIcon className="h-4 w-4" />,
-  },
+  // {
+  //   label: "Debug Contracts",
+  //   href: "/debug",
+  //   icon: <BugAntIcon className="h-4 w-4" />,
+  // },
 ]
 
 export const HeaderMenuLinks = () => {
@@ -95,10 +95,10 @@ export const Header = () => {
           <div className="relative flex h-10 w-10">
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/decentrust-logo.png" />
           </div>
-          <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-ETH</span>
-            <span className="text-xs">Ethereum dev stack</span>
-          </div>
+          {/* <div className="flex flex-col">
+            <span className="font-bold leading-tight">DecenTRUST</span>
+            <span className="text-xs">Transparent Recruitment Under Secure Technology</span>
+          </div> */}
         </Link>
         <ul className="menu menu-horizontal hidden gap-2 px-1 lg:flex lg:flex-nowrap">
           <HeaderMenuLinks />
