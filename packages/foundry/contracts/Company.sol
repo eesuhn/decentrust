@@ -109,7 +109,7 @@ contract Company {
     function submitApplication(
         uint256 _jobId,
         string memory _encryptedDataCID,
-        
+        Gender _gender
     ) public {
         require(jobListings[_jobId].isActive, "Job listing is not active");
         applicationCounter++;
