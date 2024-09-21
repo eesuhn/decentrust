@@ -1,8 +1,11 @@
+"use client"
+
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import Lottie from "lottie-react"
 import { useState } from "react"
+import hiringAnimation from "../public/handshake.json" // Make sure this path is correct
 import { Button } from "./ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 
 type TableData = {
   applicant: string
@@ -18,6 +21,7 @@ const applicantData: TableData[] = [
 
 export default function ApplicantsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isHiring, setIsHiring] = useState(false)
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -35,49 +39,55 @@ export default function ApplicantsTable() {
     setIsModalOpen(true)
   }
 
+  const handleHire = () => {
+    setIsHiring(true)
+    setTimeout(() => {
+      setIsHiring(false)
+      setIsModalOpen(false)
+    }, 20000)
+  }
+
   return (
     <>
-      <Card className="mx-auto my-6 w-full shadow-md">
-        <CardHeader>
-          <CardTitle className="text-center">Full Stack Developer</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Applicant</TableHead>
-                <TableHead>Time/Date</TableHead>
-                <TableHead>Data</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {applicantData.map((applicant, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{applicant.applicant}</TableCell>
-                  <TableCell>{formatDate(applicant.timeDate)}</TableCell>
-                  <td>
-                    <Button variant="outline" size="sm" onClick={() => handleDecrypt(applicant.data)}>
-                      Decrypt
-                    </Button>
-                  </td>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Applicant</TableHead>
+            <TableHead>Time/Date</TableHead>
+            <TableHead>Data</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {applicantData.map((applicant, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{applicant.applicant}</TableCell>
+              <TableCell>{formatDate(applicant.timeDate)}</TableCell>
+              <TableCell>
+                <Button variant="outline" size="sm" onClick={() => handleDecrypt(applicant.data)}>
+                  Decrypt
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Decrypted Data</DialogTitle>
+            <DialogTitle>{isHiring ? "Hiring Applicant" : "Decrypted Data"}</DialogTitle>
           </DialogHeader>
-          <div className="py-4">DECRYPTED DATA</div>
+          {isHiring ? (
+            <div className="flex items-center justify-center py-4">
+              <Lottie animationData={hiringAnimation} style={{ width: 400, height: 400 }} />
+            </div>
+          ) : (
+            <div className="py-4">DECRYPTED DATA</div>
+          )}
           <DialogFooter className="sm:justify-between">
-            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
-              Close
+            <Button onClick={handleHire} disabled={isHiring}>
+              {isHiring ? "Hiring..." : "Hire Applicant"}
             </Button>
-            <Button onClick={() => console.log("HIREDDDD")}>Hire Applicant</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
