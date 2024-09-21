@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import { BlockieAvatar } from "@/components/scaffold-eth";
-import { useTargetNetwork } from "@/hooks/scaffold-eth/useTargetNetwork";
-import { getBlockExplorerAddressLink } from "@/utils/scaffold-eth";
-import { Address as AddressType, getAddress, isAddress } from "viem";
-import { normalize } from "viem/ens";
-import { useEnsAvatar, useEnsName } from "wagmi";
-import { AddressCopyIcon } from "./AddressCopyIcon";
-import { AddressLinkWrapper } from "./AddressLinkWrapper";
+import { BlockieAvatar } from "@/components/scaffold-eth"
+import { useTargetNetwork } from "@/hooks/scaffold-eth/useTargetNetwork"
+import { getBlockExplorerAddressLink } from "@/utils/scaffold-eth"
+import { getAddress, isAddress } from "viem"
+import { normalize } from "viem/ens"
+import { useEnsAvatar, useEnsName } from "wagmi"
+import { AddressCopyIcon } from "./AddressCopyIcon"
+import { AddressLinkWrapper } from "./AddressLinkWrapper"
 
 const textSizeMap = {
   "3xs": "text-[10px]",
@@ -20,7 +20,7 @@ const textSizeMap = {
   "2xl": "text-2xl",
   "3xl": "text-3xl",
   "4xl": "text-4xl",
-} as const;
+} as const
 
 const blockieSizeMap = {
   "3xs": 4,
@@ -36,7 +36,7 @@ const blockieSizeMap = {
   "5xl": 19,
   "6xl": 21,
   "7xl": 23,
-} as const;
+} as const
 
 const copyIconSizeMap = {
   "3xs": "h-2.5 w-2.5",
@@ -49,42 +49,36 @@ const copyIconSizeMap = {
   "2xl": "h-6 w-6",
   "3xl": "h-[26px] w-[26px]",
   "4xl": "h-7 w-7",
-} as const;
+} as const
 
-type SizeMap = typeof textSizeMap | typeof blockieSizeMap;
+type SizeMap = typeof textSizeMap | typeof blockieSizeMap
 
 const getNextSize = <T extends SizeMap>(sizeMap: T, currentSize: keyof T, step = 1): keyof T => {
-  const sizes = Object.keys(sizeMap) as Array<keyof T>;
-  const currentIndex = sizes.indexOf(currentSize);
-  const nextIndex = Math.min(currentIndex + step, sizes.length - 1);
-  return sizes[nextIndex];
-};
+  const sizes = Object.keys(sizeMap) as Array<keyof T>
+  const currentIndex = sizes.indexOf(currentSize)
+  const nextIndex = Math.min(currentIndex + step, sizes.length - 1)
+  return sizes[nextIndex]
+}
 
 const getPrevSize = <T extends SizeMap>(sizeMap: T, currentSize: keyof T, step = 1): keyof T => {
-  const sizes = Object.keys(sizeMap) as Array<keyof T>;
-  const currentIndex = sizes.indexOf(currentSize);
-  const prevIndex = Math.max(currentIndex - step, 0);
-  return sizes[prevIndex];
-};
+  const sizes = Object.keys(sizeMap) as Array<keyof T>
+  const currentIndex = sizes.indexOf(currentSize)
+  const prevIndex = Math.max(currentIndex - step, 0)
+  return sizes[prevIndex]
+}
 
 type AddressProps = {
-  address?: AddressType;
-  disableAddressLink?: boolean;
-  format?: "short" | "long";
-  size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-  onlyEnsOrAddress?: boolean;
-};
+  address?: any
+  disableAddressLink?: boolean
+  format?: "short" | "long"
+  size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl"
+  onlyEnsOrAddress?: boolean
+}
 
-export const Address = ({
-  address,
-  disableAddressLink,
-  format,
-  size = "base",
-  onlyEnsOrAddress = false,
-}: AddressProps) => {
-  const checkSumAddress = address ? getAddress(address) : undefined;
+export const Address = ({ address, disableAddressLink, format, size = "base", onlyEnsOrAddress = false }: AddressProps) => {
+  const checkSumAddress = address ? getAddress(address) : undefined
 
-  const { targetNetwork } = useTargetNetwork();
+  const { targetNetwork } = useTargetNetwork()
 
   const { data: ens, isLoading: isEnsNameLoading } = useEnsName({
     address: checkSumAddress,
@@ -92,7 +86,7 @@ export const Address = ({
     query: {
       enabled: isAddress(checkSumAddress ?? ""),
     },
-  });
+  })
   const { data: ensAvatar } = useEnsAvatar({
     name: ens ? normalize(ens) : undefined,
     chainId: 1,
@@ -100,23 +94,23 @@ export const Address = ({
       enabled: Boolean(ens),
       gcTime: 30_000,
     },
-  });
+  })
 
-  const shortAddress = checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4);
-  const displayAddress = format === "long" ? checkSumAddress : shortAddress;
-  const displayEnsOrAddress = ens || displayAddress;
+  const shortAddress = checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)
+  const displayAddress = format === "long" ? checkSumAddress : shortAddress
+  const displayEnsOrAddress = ens || displayAddress
 
-  const showSkeleton = !checkSumAddress || (!onlyEnsOrAddress && (ens || isEnsNameLoading));
+  const showSkeleton = !checkSumAddress || (!onlyEnsOrAddress && (ens || isEnsNameLoading))
 
-  const addressSize = showSkeleton && !onlyEnsOrAddress ? getPrevSize(textSizeMap, size, 2) : size;
-  const ensSize = getNextSize(textSizeMap, addressSize);
-  const blockieSize = showSkeleton && !onlyEnsOrAddress ? getNextSize(blockieSizeMap, addressSize, 4) : addressSize;
+  const addressSize = showSkeleton && !onlyEnsOrAddress ? getPrevSize(textSizeMap, size, 2) : size
+  const ensSize = getNextSize(textSizeMap, addressSize)
+  const blockieSize = showSkeleton && !onlyEnsOrAddress ? getNextSize(blockieSizeMap, addressSize, 4) : addressSize
 
   if (!checkSumAddress) {
     return (
       <div className="flex items-center">
         <div
-          className="flex-shrink-0 skeleton rounded-full"
+          className="skeleton flex-shrink-0 rounded-full"
           style={{
             width: (blockieSizeMap[blockieSize] * 24) / blockieSizeMap["base"],
             height: (blockieSizeMap[blockieSize] * 24) / blockieSizeMap["base"],
@@ -124,64 +118,51 @@ export const Address = ({
         ></div>
         <div className="flex flex-col space-y-1">
           {!onlyEnsOrAddress && (
-            <div className={`ml-1.5 skeleton rounded-lg font-bold ${textSizeMap[ensSize]}`}>
+            <div className={`skeleton ml-1.5 rounded-lg font-bold ${textSizeMap[ensSize]}`}>
               <span className="invisible">0x1234...56789</span>
             </div>
           )}
-          <div className={`ml-1.5 skeleton rounded-lg ${textSizeMap[addressSize]}`}>
+          <div className={`skeleton ml-1.5 rounded-lg ${textSizeMap[addressSize]}`}>
             <span className="invisible">0x1234...56789</span>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   if (!isAddress(checkSumAddress)) {
-    return <span className="text-error">Wrong address</span>;
+    return <span className="text-error">Wrong address</span>
   }
 
-  const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, checkSumAddress);
+  const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, checkSumAddress)
 
   return (
-    <div className="flex items-center flex-shrink-0">
+    <div className="flex flex-shrink-0 items-center">
       <div className="flex-shrink-0">
-        <BlockieAvatar
-          address={checkSumAddress}
-          ensImage={ensAvatar}
-          size={(blockieSizeMap[blockieSize] * 24) / blockieSizeMap["base"]}
-        />
+        <BlockieAvatar address={checkSumAddress} ensImage={ensAvatar} size={(blockieSizeMap[blockieSize] * 24) / blockieSizeMap["base"]} />
       </div>
       <div className="flex flex-col">
         {showSkeleton &&
           (isEnsNameLoading ? (
-            <div className={`ml-1.5 skeleton rounded-lg font-bold ${textSizeMap[ensSize]}`}>
+            <div className={`skeleton ml-1.5 rounded-lg font-bold ${textSizeMap[ensSize]}`}>
               <span className="invisible">{shortAddress}</span>
             </div>
           ) : (
             <span className={`ml-1.5 ${textSizeMap[ensSize]} font-bold`}>
-              <AddressLinkWrapper
-                disableAddressLink={disableAddressLink}
-                blockExplorerAddressLink={blockExplorerAddressLink}
-              >
+              <AddressLinkWrapper disableAddressLink={disableAddressLink} blockExplorerAddressLink={blockExplorerAddressLink}>
                 {ens}
               </AddressLinkWrapper>
             </span>
           ))}
         <div className="flex">
           <span className={`ml-1.5 ${textSizeMap[addressSize]} font-normal`}>
-            <AddressLinkWrapper
-              disableAddressLink={disableAddressLink}
-              blockExplorerAddressLink={blockExplorerAddressLink}
-            >
+            <AddressLinkWrapper disableAddressLink={disableAddressLink} blockExplorerAddressLink={blockExplorerAddressLink}>
               {onlyEnsOrAddress ? displayEnsOrAddress : displayAddress}
             </AddressLinkWrapper>
           </span>
-          <AddressCopyIcon
-            className={`ml-1 text-sky-600 ${copyIconSizeMap[addressSize]} cursor-pointer`}
-            address={checkSumAddress}
-          />
+          <AddressCopyIcon className={`ml-1 text-sky-600 ${copyIconSizeMap[addressSize]} cursor-pointer`} address={checkSumAddress} />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
