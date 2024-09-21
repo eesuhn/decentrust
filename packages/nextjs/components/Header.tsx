@@ -93,7 +93,7 @@ export const Header = () => {
         </div>
         <Link href="/" passHref className="ml-4 mr-6 hidden shrink-0 items-center gap-2 lg:flex">
           <div className="relative flex h-10 w-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+            <Image alt="SE2 logo" className="cursor-pointer" fill src="/decentrust-logo.png" />
           </div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight">Scaffold-ETH</span>
