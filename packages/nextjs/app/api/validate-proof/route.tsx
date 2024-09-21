@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 
-const WORLDCOIN_API_URL = `https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_WORLDCOIN_APP_ID}`
+// const WORLDCOIN_API_URL = `https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_WORLDCOIN_APP_ID}`
+const WORLDCOIN_API_URL = `https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_WORLDCOIN_APP_STAGING_ID}`
 
 export async function POST(req: NextRequest) {
   const { proof, merkle_root, nullifier_hash, verification_level } = await req.json()
-  console.log({ proof, merkle_root, nullifier_hash })
 
   try {
     const response = await fetch(WORLDCOIN_API_URL, {
@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
 
     const result = await response.json()
 
-    console.log("worldcoin api response: ", result)
 
     if (response.ok) {
       return NextResponse.json({
