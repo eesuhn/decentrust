@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Award, ChevronRight, FileText, Medal, Star, Trophy } from "lucide-react"
+import { ChevronRight, FileText } from "lucide-react"
 import { useState } from "react"
 
 const jobListings = [
@@ -9,13 +9,6 @@ const jobListings = [
     name: "DevOps Engineer",
   },
   { name: "Cybersecurity Analyst" },
-]
-
-const badges = [
-  { name: "Early Adopter", icon: Star },
-  { name: "Blockchain Expert", icon: Award },
-  { name: "Diamond Contributor", icon: Trophy },
-  { name: "1000 Commits", icon: Medal },
 ]
 
 export default function DashboardWidget() {
