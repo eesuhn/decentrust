@@ -1,4 +1,5 @@
 import { ChevronDown, ChevronUp, MapPin, Users } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
 
 const jobs = [
@@ -58,7 +59,9 @@ const CollapsibleCard = () => {
           >
             <div className="mt-4 space-y-10 bg-white">
               <p className="text-gray-700">{description}</p>
-              <button className="mt-4 rounded-md bg-blue-600 px-4 py-2 text-white transition duration-150 hover:bg-blue-700">Apply Now</button>
+              <Link href="/assessment">
+                <button className="mt-4 rounded-md bg-blue-600 px-4 py-2 text-white transition duration-150 hover:bg-blue-700">Apply Now</button>
+              </Link>
             </div>
           </div>
         </div>
