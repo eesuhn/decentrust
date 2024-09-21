@@ -37,6 +37,9 @@
     --chart-3: 186 64% 52%; /* #30c8d9 - Accent */
     --chart-4: 195 52% 90%; /* #d8f2f2 - Neutral */
     --chart-5: 0 84% 60%; /* #f24822 - Destructive, used for contrast in charts */
+
+    /* Variable for inverted color */
+    --inverted: 186 64% 52%; /* #30c8d9 - Cyan color from the palette for inverted elements in dark mode */
   }
 
   .dark {
@@ -63,15 +66,14 @@
     --input: 201 73% 43%; /* Using secondary color (#1b80bf) for input borders */
     --ring: 207 96% 36%; /* Using primary color (#0468b4) for focus rings */
 
-    /* Chart colors remain the same in dark mode for consistency */
+    /* Keep the inverted color the same in dark mode */
+    --inverted: 186 64% 52%; /* #30c8d9 - Cyan color from the palette for inverted elements in dark mode */
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+@layer utilities {
+  .dark-invert {
+    @apply dark:brightness-100 dark:contrast-100 dark:hue-rotate-180;
+    @apply filter: dark:invert(48%) dark:sepia(13%) dark:saturate(3207%) dark:hue-rotate(130deg) dark:brightness(95%) dark:contrast(80%);
   }
 }
