@@ -1,24 +1,36 @@
-"use client";
+"use client"
 
-import type { NextPage } from "next";
-import Image from "next/image";
-import { useAccount } from "wagmi";
+import Banner from "@/components/Banner"
+import WelcomeCard from "@/components/WelcomeCard"
+import { useState } from "react"
 
-const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+const WelcomePage = () => {
+  // Dummy company data
+  const [companies] = useState([
+    { id: 1, name: "TechCorp" },
+    { id: 2, name: "InnoSystems" },
+    { id: 3, name: "DataDynamics" },
+  ])
 
   return (
-    <>
-      <Image
-        src="/banner-2.png"
-        alt="Banner"
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority
-        className="border-4 border-black transition-all duration-300 ease-in-out dark:invert object-contain"
-      />
-    </>
-  );
-};
+    <div className="relative flex h-full w-full flex-grow flex-col items-center bg-white pt-28">
+      <div className="pb-10">
+        <div className="relative z-10 space-y-6 text-center">
+          <h1 className="z-10 text-7xl font-semibold tracking-wide text-primary">
+            Decen<span className="text-accent">TRUST</span>
+          </h1>
+          <h3 className="text-2xl text-secondary">Decentralised Transparent Recruitment Under Secure Technology</h3>
+        </div>
+        <div className="absolute inset-0 z-0">
+          <Banner banner={1} />
+        </div>
+      </div>
+      <div className="relative z-10 mx-auto mt-10 flex flex-row space-x-24">
+        <WelcomeCard title="applicant" />
+        <WelcomeCard title="company" />
+      </div>
+    </div>
+  )
+}
 
-export default Home;
+export default WelcomePage
