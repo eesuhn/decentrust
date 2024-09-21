@@ -24,3 +24,7 @@ dist
 
 .env
 .env.*
+
+yarn.lock
+packages/foundry/yarn.lock
+packages/nextjs/yarn.lock
