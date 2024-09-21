@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from "lucide-react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
@@ -51,6 +52,18 @@ export default function AssessmentPage() {
     linkedIn: "https://www.linkedin.com/in/yourprofile",
     github: "https://github.com/yourusername",
     resume: "https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+    assessment: {
+      question:
+        "A smart contract has recorded the winner of the ETHSingapore hackathon. Let's write a function that reveals the winner, but first, we need to validate the contract!",
+      answer: `function revealWinner(signature, contract) {
+    const isValid = signature === "0xETHSingapore";
+    const winner = contract.winner || "No winner yet";
+    return isValid ? \`The winner is... \${winner}!\` : "Invalid contract. Try again.";
+  }
+  const contract = { winner: "decenTRUST" };
+  const signature = "0xETHSingapore";
+  console.log(revealWinner(signature, contract)); // Who will win?`,
+    },
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -110,7 +123,9 @@ export default function AssessmentPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex aspect-video items-center justify-center rounded-md bg-gray-200">
-                <span className="text-gray-500">Results Image Placeholder</span>
+                <span className="text-gray-500">
+                  <Image src={`/assessment-result.png`} alt="assessment results" width={500} height={900} />
+                </span>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
