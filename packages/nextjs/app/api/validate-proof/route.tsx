@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
 
     const result = await response.json()
 
+    console.log("worldcoin api response: ", result)
 
     if (response.ok) {
       return NextResponse.json({

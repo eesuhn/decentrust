@@ -1,5 +1,6 @@
 import { ScaffoldEthAppWithProviders } from "@/components/ScaffoldEthAppWithProviders"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { EncryptionProvider } from "@/context/encryption-context"
 import "@/styles/globals.css"
 import { getMetadata } from "@/utils/scaffold-eth/getMetadata"
 import "@rainbow-me/rainbowkit/styles.css"
@@ -14,7 +15,9 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
     <html suppressHydrationWarning>
       <body className="bg-base-100 dark:bg-black dark:text-white">
         <ThemeProvider enableSystem>
-          <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+          <EncryptionProvider>
+            <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+          </EncryptionProvider>
         </ThemeProvider>
       </body>
     </html>
