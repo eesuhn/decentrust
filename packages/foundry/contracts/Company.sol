@@ -31,7 +31,6 @@ contract Company {
         OfferAccepted
     }
     enum Gender {
-        Unspecified,
         Male,
         Female,
         Other

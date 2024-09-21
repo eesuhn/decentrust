@@ -8,7 +8,7 @@ contract CompanyFactory {
 
   event CompanyCreated(address indexed companyAddress, address indexed owner);
 
-  mapping(address => address) public companyOwners;
+  mapping(address => address) private companyOwners;
 
   function createCompany(string memory _companyPublicKey, string memory _name) public {
     // Ensure the sender hasn't created a company yet
@@ -25,5 +25,9 @@ contract CompanyFactory {
 
   function getCompanies() public view returns (address[] memory) {
     return companies;
+  }
+
+  function getCompany(address _companyOwner) public view returns (address) {
+    return companyOwners[_companyOwner];
   }
 }
