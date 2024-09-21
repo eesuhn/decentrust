@@ -12,7 +12,7 @@ contract CompanyTest is Test {
 
     function setUp() public {
         vm.prank(owner);
-        company = new Company(owner, "CompanyPublicKey");
+        company = new Company(owner, "CompanyPublicKey", "Company 1");
     }
 
     function testCreateJobListing() public {
@@ -37,14 +37,20 @@ contract CompanyTest is Test {
         assertEq(app.applicant, applicant);
         assertEq(app.jobId, 1);
         assertEq(app.encryptedDataCID, "EncryptedCID");
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.Applied));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.Applied)
+        );
         assertEq(uint256(app.gender), uint256(Company.Gender.Female));
     }
 
     function testFullApplicationFlow() public {
         // Company creates a job listing
         vm.prank(owner);
-        company.createJobListing("Software Engineer", "Develop smart contracts");
+        company.createJobListing(
+            "Software Engineer",
+            "Develop smart contracts"
+        );
 
         // Applicant submits an application
         vm.prank(applicant);
@@ -52,37 +58,54 @@ contract CompanyTest is Test {
 
         // Verify initial application status
         Company.Application memory app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.Applied));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.Applied)
+        );
 
         // Company gives assessment
         vm.prank(owner);
         company.giveAssessment(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.AssessmentGiven));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.AssessmentGiven)
+        );
 
         // Applicant completes assessment
         vm.prank(applicant);
         company.completeAssessment(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.AssessmentCompleted));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.AssessmentCompleted)
+        );
 
         // Company releases results
         vm.prank(owner);
         company.releaseResults(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.ResultsOut));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.ResultsOut)
+        );
 
         // Applicant grants data access (increments decryption counter)
         vm.prank(applicant);
         company.grantDataAccess(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.DataAccessGranted));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.DataAccessGranted)
+        );
 
-        uint256 femaleDecryptionCount = company.decryptionCounter(Company.Gender.Female);
+        uint256 femaleDecryptionCount = company.decryptionCounter(
+            Company.Gender.Female
+        );
         assertEq(femaleDecryptionCount, 1);
 
         // Company sends offer (increments offer counter)
@@ -90,7 +113,10 @@ contract CompanyTest is Test {
         company.sendOffer(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.OfferSent));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.OfferSent)
+        );
 
         uint256 femaleOfferCount = company.offerCounter(Company.Gender.Female);
         assertEq(femaleOfferCount, 1);
@@ -100,7 +126,10 @@ contract CompanyTest is Test {
         company.acceptOffer(1);
 
         app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.OfferAccepted));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.OfferAccepted)
+        );
     }
 
     function testCountersForDifferentGenders() public {
@@ -116,7 +145,11 @@ contract CompanyTest is Test {
 
         // Other applicant submits application
         vm.prank(otherApplicant);
-        company.submitApplication(1, "EncryptedCID_Other", Company.Gender.Other);
+        company.submitApplication(
+            1,
+            "EncryptedCID_Other",
+            Company.Gender.Other
+        );
 
         // Proceed with male applicant
         vm.prank(owner);
@@ -131,7 +164,9 @@ contract CompanyTest is Test {
         vm.prank(maleApplicant);
         company.grantDataAccess(2);
 
-        uint256 maleDecryptionCount = company.decryptionCounter(Company.Gender.Male);
+        uint256 maleDecryptionCount = company.decryptionCounter(
+            Company.Gender.Male
+        );
         assertEq(maleDecryptionCount, 1);
 
         vm.prank(owner);
@@ -153,7 +188,9 @@ contract CompanyTest is Test {
         vm.prank(otherApplicant);
         company.grantDataAccess(3);
 
-        uint256 otherDecryptionCount = company.decryptionCounter(Company.Gender.Other);
+        uint256 otherDecryptionCount = company.decryptionCounter(
+            Company.Gender.Other
+        );
         assertEq(otherDecryptionCount, 1);
 
         vm.prank(owner);
@@ -168,7 +205,11 @@ contract CompanyTest is Test {
         company.createJobListing("QA Engineer", "Test applications");
 
         vm.prank(applicant);
-        company.submitApplication(1, "EncryptedCID", Company.Gender.Unspecified);
+        company.submitApplication(
+            1,
+            "EncryptedCID",
+            Company.Gender.Unspecified
+        );
 
         // Non-owner trying to give assessment
         vm.prank(applicant);
@@ -207,7 +248,10 @@ contract CompanyTest is Test {
         company.acceptOffer(1);
 
         Company.Application memory app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.OfferAccepted));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.OfferAccepted)
+        );
     }
 
     function testApplicationStatusFlowConstraints() public {
@@ -252,7 +296,10 @@ contract CompanyTest is Test {
         company.acceptOffer(1);
 
         Company.Application memory app = company.getApplication(1);
-        assertEq(uint256(app.status), uint256(Company.ApplicationStatus.OfferAccepted));
+        assertEq(
+            uint256(app.status),
+            uint256(Company.ApplicationStatus.OfferAccepted)
+        );
     }
 
     function testUpdateJobListing() public {
@@ -260,7 +307,12 @@ contract CompanyTest is Test {
         company.createJobListing("Initial Title", "Initial Description");
 
         vm.prank(owner);
-        company.updateJobListing(1, "Updated Title", "Updated Description", false);
+        company.updateJobListing(
+            1,
+            "Updated Title",
+            "Updated Description",
+            false
+        );
 
         Company.JobListing memory job = company.getJobListing(1);
         assertEq(job.title, "Updated Title");
@@ -274,6 +326,11 @@ contract CompanyTest is Test {
 
         vm.prank(applicant);
         vm.expectRevert("Not authorized");
-        company.updateJobListing(1, "Malicious Update", "Malicious Description", true);
+        company.updateJobListing(
+            1,
+            "Malicious Update",
+            "Malicious Description",
+            true
+        );
     }
 }

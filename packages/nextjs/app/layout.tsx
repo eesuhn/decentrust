@@ -4,6 +4,7 @@ import { EncryptionProvider } from "@/context/encryption-context"
 import "@/styles/globals.css"
 import { getMetadata } from "@/utils/scaffold-eth/getMetadata"
 import "@rainbow-me/rainbowkit/styles.css"
+import { Toaster } from "react-hot-toast"
 
 export const metadata = getMetadata({
   title: "DecenTRUST",
@@ -16,6 +17,7 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
       <body className="bg-base-100 dark:bg-black dark:text-white">
         <ThemeProvider enableSystem>
           <EncryptionProvider>
+            <Toaster />
             <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
           </EncryptionProvider>
         </ThemeProvider>
