@@ -2,14 +2,19 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useEncryption } from "@/context/encryption-context"
+import { Dialog } from "@radix-ui/react-dialog"
+import Lottie from "lottie-react"
 import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
+import hiringAnimation from "../../public/encrypting.json"
 
 const CodeEditor = ({ value }: { value: string }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -31,8 +36,10 @@ const CodeEditor = ({ value }: { value: string }) => {
 }
 
 export default function AssessmentPage() {
+  const { encryptWithPublicKey, encryptedMessage } = useEncryption()
   const [showResults, setShowResults] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(1)
+  const [isEncrypting, setIsEncrypting] = useState(false)
   const [code, setCode] = useState(`function revealWinner(signature, contract) {
     const isValid = signature === "0xETHSingapore";
     const winner = contract.winner || "No winner yet";
@@ -52,25 +59,16 @@ export default function AssessmentPage() {
     linkedIn: "https://www.linkedin.com/in/yourprofile",
     github: "https://github.com/yourusername",
     resume: "https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
-    assessment: {
-      question:
-        "A smart contract has recorded the winner of the ETHSingapore hackathon. Let's write a function that reveals the winner, but first, we need to validate the contract!",
-      answer: `function revealWinner(signature, contract) {
-    const isValid = signature === "0xETHSingapore";
-    const winner = contract.winner || "No winner yet";
-    return isValid ? \`The winner is... \${winner}!\` : "Invalid contract. Try again.";
-  }
-  const contract = { winner: "decenTRUST" };
-  const signature = "0xETHSingapore";
-  console.log(revealWinner(signature, contract)); // Who will win?`,
-    },
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    encryptWithPublicKey(JSON.stringify(applicantData))
     // ENCRYPT AND SUBMIT DATA HERE
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    
+    console.log(encryptedMessage)
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+    setIsEncrypting(false)
+
     // Redirect to /company
     router.push("/company")
   }
@@ -160,12 +158,28 @@ export default function AssessmentPage() {
                   <Label htmlFor="resume">Resume Link</Label>
                   <Input id="resume" type="url" value={applicantData.resume} readOnly />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button onClick={() => setIsEncrypting(true)} type="submit" className="w-full">
                   Encrypt and submit data
                 </Button>
               </form>
             </CardContent>
           </Card>
+        )}
+
+        {isEncrypting && (
+          <Dialog open={isEncrypting}>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Encrypting</DialogTitle>
+              </DialogHeader>
+
+              <div className="flex items-center justify-center py-4">
+                <Lottie animationData={hiringAnimation} style={{ width: 400, height: 400 }} />
+              </div>
+
+              <DialogFooter className="sm:justify-between"></DialogFooter>
+            </DialogContent>
+          </Dialog>
         )}
 
         <div className="space-y-2">
@@ -181,3 +195,17 @@ export default function AssessmentPage() {
     </div>
   )
 }
+
+// ;<Dialog open={isEncrypting} onOpenChange={setIsModalOpen}>
+//   <DialogContent className="sm:max-w-[425px]">
+//     <DialogHeader>
+//       <DialogTitle>Encrypting</DialogTitle>
+//     </DialogHeader>
+
+//     <div className="flex items-center justify-center py-4">
+//       <Lottie animationData={hiringAnimation} style={{ width: 400, height: 400 }} />
+//     </div>
+
+//     <DialogFooter className="sm:justify-between"></DialogFooter>
+//   </DialogContent>
+// </Dialog>
