@@ -4,58 +4,66 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* New Primary: #0468bf */
-    --foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
-    --card: 0 0% 100%; /* New Accent: #30c8d9 */
-    --card-foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
-    --popover: 0 0% 100%; /* New Accent: #30c8d9 */
-    --popover-foreground: 240 10% 3.9%; /* New Secondary: #1b80bf */
-    --primary: 240 5.9% 10%; /* New Primary: #0468bf */
-    --primary-foreground: 0 0% 98%; /* White: #ffffff */
-    --secondary: 240 4.8% 95.9%; /* New Secondary: #1b80bf */
-    --secondary-foreground: 240 5.9% 10%; /* White: #ffffff */
-    --muted: 240 4.8% 95.9%; /* New Neutral: #d8f2f2 */
-    --muted-foreground: 240 3.8% 46.1%; /* New Primary: #0468bf */
-    --accent: 240 4.8% 95.9%; /* New Accent: #30c8d9 */
-    --accent-foreground: 240 5.9% 10%; /* White: #ffffff */
-    --destructive: 0 84.2% 60.2%; /* Keep Dark Olive: #FF8863 */
-    --destructive-foreground: 0 0% 98%; /* White */
-    --border: 240 5.9% 90%; /* Lighter version of Secondary */
-    --input: 240 5.9% 90%; /* Same as Secondary */
-    --ring: 240 10% 3.9%; /* New Primary */
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%; /* New Primary: #0468bf */
-    --chart-2: 173 58% 39%; /* New Secondary: #1b80bf */
-    --chart-3: 197 37% 24%; /* New Accent: #30c8d9 */
-    --chart-4: 43 74% 66%; /* New Neutral: #d8f2f2 */
-    --chart-5: 27 87% 67%; /* Dark Olive: #FF8863 */
+    /* Main color palette */
+    --primary: 207 96% 36%; /* #0468b4 - Main brand color, used for primary actions and key UI elements */
+    --secondary: 201 73% 43%; /* #1b80bf - Complementary color, used for secondary actions and accents */
+    --accent: 186 64% 52%; /* #30c8d9 - Vibrant accent color for highlights and calls-to-action */
+    --neutral: 195 52% 90%; /* #d8f2f2 - Soft background color for subtle contrast */
+
+    /* Light mode specific colors */
+    --background: 195 52% 90%; /* Using neutral (#d8f2f2) as the main background */
+    --foreground: 207 96% 36%; /* Using primary (#0468b4) as the main text color */
+    --card: 0 0% 100%; /* White (#ffffff) for card backgrounds */
+    --card-foreground: 207 96% 36%; /* Primary color (#0468b4) for text on cards */
+    --popover: 0 0% 100%; /* White (#ffffff) for popover backgrounds */
+    --popover-foreground: 207 96% 36%; /* Primary color (#0468b4) for text in popovers */
+    --primary-foreground: 0 0% 100%; /* White (#ffffff) for text on primary-colored backgrounds */
+    --secondary-foreground: 0 0% 100%; /* White (#ffffff) for text on secondary-colored backgrounds */
+    --muted: 195 52% 90%; /* Neutral color (#d8f2f2) for muted backgrounds */
+    --muted-foreground: 207 96% 36%; /* Primary color (#0468b4) for text on muted backgrounds */
+    --accent-foreground: 0 0% 100%; /* White (#ffffff) for text on accent-colored backgrounds */
+    --destructive: 0 84% 60%; /* #f24822 - Warning/error color */
+    --destructive-foreground: 0 0% 100%; /* White (#ffffff) for text on destructive backgrounds */
+    --border: 201 73% 43%; /* Using secondary color (#1b80bf) for borders */
+    --input: 201 73% 43%; /* Using secondary color (#1b80bf) for input borders */
+    --ring: 207 96% 36%; /* Using primary color (#0468b4) for focus rings */
+
+    /* Other variables */
+    --radius: 0.5rem; /* Border radius for rounded corners */
+
+    /* Chart colors */
+    --chart-1: 207 96% 36%; /* #0468b4 - Primary */
+    --chart-2: 201 73% 43%; /* #1b80bf - Secondary */
+    --chart-3: 186 64% 52%; /* #30c8d9 - Accent */
+    --chart-4: 195 52% 90%; /* #d8f2f2 - Neutral */
+    --chart-5: 0 84% 60%; /* #f24822 - Destructive, used for contrast in charts */
   }
 
   .dark {
-    --background: 240 10% 3.9%; /* Darker version of Secondary */
-    --foreground: 0 0% 98%; /* Almost White */
-    --card: 240 10% 3.9%; /* Darker version of Secondary */
-    --card-foreground: 0 0% 98%; /* Almost White */
-    --popover: 240 10% 3.9%; /* Darker version of Secondary */
-    --popover-foreground: 0 0% 98%; /* Almost White */
-    --primary: 0 0% 98%; /* New Primary: #0468bf */
-    --primary-foreground: 240 5.9% 10%; /* White */
-    --secondary: 240 3.7% 15.9%; /* New Secondary: #1b80bf */
-    --secondary-foreground: 0 0% 98%; /* White */
-    --muted: 240 3.7% 15.9%; /* New Neutral: #d8f2f2 */
-    --muted-foreground: 240 5% 64.9%; /* New Primary: #0468bf */
-    --accent: 240 3.7% 15.9%; /* New Accent: #30c8d9 */
-    --accent-foreground: 0 0% 98%; /* White */
-    --destructive: 0 62.8% 30.6%; /* Dark Olive */
-    --destructive-foreground: 0 0% 98%; /* Almost White */
-    --border: 240 3.7% 15.9%; /* Darker version of Secondary */
-    --input: 240 3.7% 15.9%; /* Darker version of Secondary */
-    --ring: 240 4.9% 83.9%; /* New Primary */
-    --chart-1: 220 70% 50%; /* New Primary */
-    --chart-2: 160 60% 45%; /* New Secondary */
-    --chart-3: 30 80% 55%; /* New Accent */
-    --chart-4: 280 65% 60%; /* New Neutral */
-    --chart-5: 340 75% 55%; /* Dark Olive */
+    /* Dark mode specific colors */
+    --background: 207 96% 20%; /* #033c66 - Darker version of primary for main background */
+    --foreground: 0 0% 100%; /* White (#ffffff) for main text in dark mode */
+    --card: 207 96% 20%; /* #033c66 - Darker version of primary for card backgrounds */
+    --card-foreground: 0 0% 100%; /* White (#ffffff) for text on cards in dark mode */
+    --popover: 207 96% 20%; /* #033c66 - Darker version of primary for popover backgrounds */
+    --popover-foreground: 0 0% 100%; /* White (#ffffff) for text in popovers in dark mode */
+    --primary-foreground: 0 0% 100%; /* White (#ffffff) for text on primary-colored backgrounds */
+    --secondary-foreground: 0 0% 100%; /* White (#ffffff) for text on secondary-colored backgrounds */
+    --muted: 207 96% 15%; /* #022b4a - Even darker version of primary for muted backgrounds */
+    --muted-foreground: 195 52% 90%; /* Using neutral (#d8f2f2) for text on muted backgrounds */
+    --accent-foreground: 0 0% 100%; /* White (#ffffff) for text on accent-colored backgrounds */
+    --destructive-foreground: 0 0% 100%; /* White (#ffffff) for text on destructive backgrounds */
+
+    /* Keeping some colors consistent between light and dark modes */
+    --primary: 207 96% 36%; /* #0468b4 - Maintaining consistent primary color */
+    --secondary: 201 73% 43%; /* #1b80bf - Maintaining consistent secondary color */
+    --accent: 186 64% 52%; /* #30c8d9 - Maintaining consistent accent color */
+    --destructive: 0 84% 60%; /* #f24822 - Maintaining consistent destructive color */
+    --border: 201 73% 43%; /* Using secondary color (#1b80bf) for borders */
+    --input: 201 73% 43%; /* Using secondary color (#1b80bf) for input borders */
+    --ring: 207 96% 36%; /* Using primary color (#0468b4) for focus rings */
+
+    /* Chart colors remain the same in dark mode for consistency */
   }
 }
 
