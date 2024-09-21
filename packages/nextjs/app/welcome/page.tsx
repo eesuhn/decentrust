@@ -1,17 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import Banner from "@/components/Banner"
 import WelcomeCard from "@/components/WelcomeCard"
 
 const WelcomePage = () => {
-  // Dummy company data
-  const [companies] = useState([
-    { id: 1, name: "TechCorp" },
-    { id: 2, name: "InnoSystems" },
-    { id: 3, name: "DataDynamics" },
-  ])
-
   return (
     <div className="relative flex h-full w-full flex-grow flex-col items-center bg-white pt-28">
       <div className="pb-10">
