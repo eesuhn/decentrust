@@ -47,7 +47,7 @@ export default function AssessmentPage() {
   const router = useRouter()
 
   const applicantData = {
-    name: "Betty Buy",
+    name: "Betty Bus",
     gender: "Female",
     linkedIn: "https://www.linkedin.com/in/yourprofile",
     github: "https://github.com/yourusername",
@@ -70,6 +70,7 @@ export default function AssessmentPage() {
     e.preventDefault()
     // ENCRYPT AND SUBMIT DATA HERE
     await new Promise((resolve) => setTimeout(resolve, 1000))
+    
     // Redirect to /company
     router.push("/company")
   }
