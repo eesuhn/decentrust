@@ -8,6 +8,7 @@ contract CompanyTest is Test {
     Company company;
     address owner = address(0x1);
     address applicant = address(0x2);
+    address user1 = address(0x3);
 
     function setUp() public {
         vm.prank(owner);
