@@ -1,39 +1,40 @@
-"use client";
+"use client"
 
-import { FaucetButton, RainbowKitCustomConnectButton } from "@/components/scaffold-eth";
-import { useOutsideClick } from "@/hooks/scaffold-eth";
-import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useCallback, useRef, useState } from "react";
-import WorldIDSignIn from "./worldcoin/WorldIDSignIn";
+import { useOutsideClick } from "@/hooks/scaffold-eth"
+import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import React, { useCallback, useRef, useState } from "react"
+import { useAccount } from "wagmi"
+import Dynamic from "./dynamic/Dynamic"
+import WorldIDSignIn from "./worldcoin/WorldIDSignIn"
 
 type HeaderMenuLink = {
-  label: string;
-  href: string;
-  icon?: React.ReactNode;
-};
+  label: string
+  href: string
+  icon?: React.ReactNode
+}
 
 export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
   },
-  {
-    label: "Debug Contracts",
-    href: "/debug",
-    icon: <BugAntIcon className="h-4 w-4" />,
-  },
-];
+  // {
+  //   label: "Debug Contracts",
+  //   href: "/debug",
+  //   icon: <BugAntIcon className="h-4 w-4" />,
+  // },
+]
 
 export const HeaderMenuLinks = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <>
       {menuLinks.map(({ label, href, icon }) => {
-        const isActive = pathname === href;
+        const isActive = pathname === href
         return (
           <li key={href}>
             <Link
@@ -41,38 +42,39 @@ export const HeaderMenuLinks = () => {
               passHref
               className={`${
                 isActive ? "bg-secondary shadow-md" : ""
-              } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+              } grid grid-flow-col gap-2 rounded-full px-3 py-1.5 text-sm hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral`}
             >
               {icon}
               <span>{label}</span>
             </Link>
           </li>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 /**
  * Site header
  */
 export const Header = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const burgerMenuRef = useRef<HTMLDivElement>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const burgerMenuRef = useRef<HTMLDivElement>(null)
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
-  );
+  )
+  const { address: connectedAddress, isConnected } = useAccount()
 
   return (
-    <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
+    <div className="navbar sticky top-0 z-20 min-h-0 flex-shrink-0 justify-between bg-base-100 px-0 shadow-md shadow-secondary sm:px-2 lg:static">
       <div className="navbar-start w-auto lg:w-1/2">
-        <div className="lg:hidden dropdown" ref={burgerMenuRef}>
+        <div className="dropdown lg:hidden" ref={burgerMenuRef}>
           <label
             tabIndex={0}
-            className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
+            className={`btn btn-ghost ml-1 ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
             onClick={() => {
-              setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
+              setIsDrawerOpen((prevIsOpenState) => !prevIsOpenState)
             }}
           >
             <Bars3Icon className="h-1/2" />
@@ -80,33 +82,34 @@ export const Header = () => {
           {isDrawerOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu-compact menu dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
               onClick={() => {
-                setIsDrawerOpen(false);
+                setIsDrawerOpen(false)
               }}
             >
               <HeaderMenuLinks />
             </ul>
           )}
         </div>
-        <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
-          <div className="flex relative w-10 h-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+        <Link href="/" passHref className="ml-4 mr-6 hidden shrink-0 items-center gap-2 lg:flex">
+          <div className="relative flex h-10 w-10">
+            <Image alt="SE2 logo" className="cursor-pointer" fill src="/decentrust-logo.png" />
           </div>
-          <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-ETH</span>
-            <span className="text-xs">Ethereum dev stack</span>
-          </div>
+          {/* <div className="flex flex-col">
+            <span className="font-bold leading-tight">DecenTRUST</span>
+            <span className="text-xs">Transparent Recruitment Under Secure Technology</span>
+          </div> */}
         </Link>
-        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
+        <ul className="menu menu-horizontal hidden gap-2 px-1 lg:flex lg:flex-nowrap">
           <HeaderMenuLinks />
         </ul>
       </div>
-      <div className="navbar-end flex-grow mr-4">
-        <WorldIDSignIn />
+      <div className="navbar-end mr-4 flex-grow">
+        <Dynamic />
+        {connectedAddress && isConnected && <WorldIDSignIn />}
         {/* <RainbowKitCustomConnectButton />
         <FaucetButton /> */}
       </div>
     </div>
-  );
-};
+  )
+}
