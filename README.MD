@@ -49,6 +49,7 @@ Here's a more polished and structured version of your document, with the informa
 </details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 [![Product Screenshot][product-screenshot]](https://example.com)
@@ -67,13 +68,21 @@ DecenTRUST is a decentralized recruitment platform built to bring transparency, 
 
 ## On-chain Deployments
 
-DecenTRUST has been deployed on multiple chains to maximize accessibility and flexibility:
+DecenTRUST has been deployed on the following chains, using the same Ethereum address for each network:
 
-- **Flow Testnet**: [0xdD88CF46B46757651E432F877329ddF63B6640d7](https://evm-testnet.flowscan.io/address/0xdD88CF46B46757651E432F877329ddF63B6640d7)
-- **Linea Testnet**: [0xdD88CF46B46757651E432F877329ddF63B6640d7](https://evm-testnet.flowscan.io/address/0xdD88CF46B46757651E432F877329ddF63B6640d7)
-- **Gnosis Testnet**: [0xdD88CF46B46757651E432F877329ddF63B6640d7](https://evm-testnet.flowscan.io/address/0xdD88CF46B46757651E432F877329ddF63B6640d7)
+    Flow Testnet:
+    Contract Address: 0xdD88CF46B46757651E432F877329ddF63B6640d7
+    Flow Block explorer link: https://evm-testnet.flowscan.io/address/0xdD88CF46B46757651E432F877329ddF63B6640d7
 
-All chains share the same contract address for easy cross-chain compatibility.
+    Linea Testnet:
+    Contract Address: 0xdD88CF46B46757651E432F877329ddF63B6640d7
+    Linea block Explorer Link: https://sepolia.lineascan.build/address/0x958A42bd7Da1339D735f9dE8636eFBA9c9635eD6
+
+    Gnosis Testnet (Chiado):
+    Contract Address: 0xdD88CF46B46757651E432F877329ddF63B6640d7
+    Gnosis Block Explorer Link: https://gnosis-chiado.blockscout.com/address/0xdD88CF46B46757651E432F877329ddF63B6640d7
+
+By deploying on these chains, we maintain consistency and interoperability across different networks, ensuring a unified experience for users.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,6 +98,7 @@ All chains share the same contract address for easy cross-chain compatibility.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
 We'd like to extend our gratitude to the amazing people who have contributed to this project:
@@ -101,6 +111,7 @@ We'd like to extend our gratitude to the amazing people who have contributed to 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [product-screenshot]: ./client/public/example.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
