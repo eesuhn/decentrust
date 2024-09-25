@@ -4,7 +4,7 @@ A hiring platform powered by **Web3**. <br>
 
 <img src="./doc/cover.png" alt="cover" width="460" /> <br>
 
-DecenTRUST enables companies to find *verified talent* through **merit-based** assessment and rewards applicants with **on-chain** proof, ensuring transparency and fairness for both parties.
+DecenTRUST enables companies to find *verified talent* through **merit-based** assessment and rewards applicants with **on-chain** proof, ensuring *transparency* and *fairness* for both parties.
 
 ![Next.js][Next.js] ![Solidity][Solidity] ![Hardhat][Hardhat]
 
