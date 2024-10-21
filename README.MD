@@ -43,4 +43,4 @@ Linea
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Solidity]: https://img.shields.io/badge/solidity-363636?style=for-the-badge&logo=solidity&logoColor=white
-[Foundry]: https://img.shields.io/badge/foundry-242424?style=for-the-badge&logo=foundry&logoColor=white
+[Foundry]: https://img.shields.io/badge/foundry-2F80ED?style=for-the-badge&logo=foundry&logoColor=white
