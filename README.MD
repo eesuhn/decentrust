@@ -6,7 +6,7 @@ A hiring platform powered by **Web3**. <br>
 
 DecenTRUST enables companies to find *verified talent* through **merit-based** assessment and rewards applicants with **on-chain** proof, ensuring *transparency* and *fairness* for both parties.
 
-![Next.js][Next.js] ![Solidity][Solidity] ![Hardhat][Hardhat]
+![Next.js][Next.js] ![Foundry][Foundry] ![Solidity][Solidity]
 
 - **Best Consumer Application** \@ [*Sign Protocol*](https://sign.global/)
 - **Pool Prize** \@ [*Worldcoin*](https://worldcoin.org/)
@@ -43,4 +43,4 @@ Linea
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Solidity]: https://img.shields.io/badge/solidity-363636?style=for-the-badge&logo=solidity&logoColor=white
-[Hardhat]: https://img.shields.io/badge/hardhat-2F80ED?style=for-the-badge&logo=hardhat&logoColor=white
+[Foundry]: https://img.shields.io/badge/foundry-20289d?style=for-the-badge&logo=foundry&logoColor=white
